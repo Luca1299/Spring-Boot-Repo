@@ -28,31 +28,26 @@ public class MainController {
         userRepository.save(n);
         return "Saved";
     }
-
     @GetMapping(path="/users")
     public @ResponseBody Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
-
     @GetMapping(path="/findUserByName/{name}")
     public @ResponseBody List<User> findUserByName (@PathVariable(name = "name") String name) {
 
         return userRepository.findUserByName(name);
     }
-
     @GetMapping(path="/findUserByNameIgnoreCase/{name}")
     public @ResponseBody List<User> findUserByNameIgnoreCase (@PathVariable(name = "name") String name) {
 
         return userRepository.findUserByNameIgnoreCase(name);
     }
-
     @GetMapping(path="/find/{name}")
     public @ResponseBody List<User> findUserByNameContainingIgnoreCase (@PathVariable(name = "name") String name) {
 
         return userRepository.findUserByNameContainingIgnoreCase(name);
     }
-
     @GetMapping(path="/findById")
     public @ResponseBody User findById (@RequestParam Integer id) {
 
@@ -60,7 +55,6 @@ public class MainController {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utente non trovato")
         );
     }
-
     @GetMapping(path="/delete")
     public @ResponseBody String deleteUserById (@RequestParam Integer id) {
 
@@ -74,5 +68,4 @@ public class MainController {
         }
         return "User doesn't exists";
     }
-
 }

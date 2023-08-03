@@ -60,4 +60,19 @@ public class MainController {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utente non trovato")
         );
     }
+
+    @GetMapping(path="/delete")
+    public @ResponseBody String deleteUserById (@RequestParam Integer id) {
+
+        if (userRepository.existsById(id)) {
+            try {
+                userRepository.deleteById(id);
+                return "User deleted";
+            } catch (IllegalArgumentException e) {
+                System.out.println("Exception" + e);
+            }
+        }
+        return "User doesn't exists";
+    }
+
 }
